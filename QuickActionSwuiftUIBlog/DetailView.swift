@@ -15,9 +15,3 @@ struct DetailView: View {
             .navigationBarTitle(name)
     }
 }
-
-//struct DetailView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DetailView(name: )
-//    }
-//}

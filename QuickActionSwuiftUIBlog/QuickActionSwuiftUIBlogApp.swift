@@ -27,21 +27,21 @@ struct QuickActionSwuiftUIBlogApp: App {
                 print("App is active")
                 guard let name = shortcutItemToHandle?.userInfo?["name"] as? String else { return }
                 switch name {
-                               case "tweet":
-                                   print("tweet is selected")
-                                   quickActionSettings.quickAction = .details(name: name)
-                               case "call":
-                                   print("call is selected")
-                                   quickActionSettings.quickAction = .details(name: name)
-                               case "message":
-                                   print("message is selected")
-                                   quickActionSettings.quickAction = .details(name: name)
-                               case "saved":
-                                   print("saved is selected")
-                                   quickActionSettings.quickAction = .details(name: name)
-                               default:
-                                   print("default ")
-                               }
+                case "tweet":
+                    print("tweet is selected")
+                    quickActionSettings.quickAction = .details(name: name)
+                case "call":
+                    print("call is selected")
+                    quickActionSettings.quickAction = .details(name: name)
+                case "message":
+                    print("message is selected")
+                    quickActionSettings.quickAction = .details(name: name)
+                case "saved":
+                    print("saved is selected")
+                    quickActionSettings.quickAction = .details(name: name)
+                default:
+                    print("default ")
+                }
             case .inactive:
                 print("App is inactive")
             case .background:
@@ -56,17 +56,17 @@ struct QuickActionSwuiftUIBlogApp: App {
     
     func addQuickActions() {
         var tweetuserInfo: [String: NSSecureCoding] {
-                    return ["name" : "tweet" as NSSecureCoding]
-                }
-                var calluserInfo: [String: NSSecureCoding] {
-                    return ["name" : "call" as NSSecureCoding]
-                }
-                var messageuserInfo: [String: NSSecureCoding] {
-                    return ["name" : "message" as NSSecureCoding]
-                }
-                var saveduserInfo: [String: NSSecureCoding] {
-                    return ["name" : "saved" as NSSecureCoding]
-                }
+            return ["name" : "tweet" as NSSecureCoding]
+        }
+        var calluserInfo: [String: NSSecureCoding] {
+            return ["name" : "call" as NSSecureCoding]
+        }
+        var messageuserInfo: [String: NSSecureCoding] {
+            return ["name" : "message" as NSSecureCoding]
+        }
+        var saveduserInfo: [String: NSSecureCoding] {
+            return ["name" : "saved" as NSSecureCoding]
+        }
         
         UIApplication.shared.shortcutItems = [
             UIApplicationShortcutItem(type: "Tweet", localizedTitle: "Tweet", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .compose), userInfo: tweetuserInfo),
@@ -88,7 +88,7 @@ struct QuickActionSwuiftUIBlogApp: App {
             return sceneConfiguration
         }
     }
-
+    
     class CustomSceneDelegate: UIResponder, UIWindowSceneDelegate {
         func windowScene(_ windowScene: UIWindowScene, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
             shortcutItemToHandle = shortcutItem
