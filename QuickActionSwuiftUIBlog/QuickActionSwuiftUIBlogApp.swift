@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//let quickActionSettings = QuickActionSettings()
+let quickActionSettings = QuickActionSettings()
 var shortcutItemToHandle: UIApplicationShortcutItem?
 
 @main
@@ -18,11 +18,30 @@ struct QuickActionSwuiftUIBlogApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                // We will use this modifier below to pass along which quick action was pressed
+                .environmentObject(quickActionSettings)
         }
         .onChange(of: lifeCycle) { (newLifeCyclePhase) in
             switch newLifeCyclePhase {
             case .active :
                 print("App is active")
+                guard let name = shortcutItemToHandle?.userInfo?["name"] as? String else { return }
+                switch name {
+                               case "tweet":
+                                   print("tweet is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               case "call":
+                                   print("call is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               case "message":
+                                   print("message is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               case "saved":
+                                   print("saved is selected")
+                                   quickActionSettings.quickAction = .details(name: name)
+                               default:
+                                   print("default ")
+                               }
             case .inactive:
                 print("App is inactive")
             case .background:
@@ -50,10 +69,10 @@ struct QuickActionSwuiftUIBlogApp: App {
                 }
         
         UIApplication.shared.shortcutItems = [
-            UIApplicationShortcutItem(type: "Tweet", localizedTitle: "Tweet", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .compose)),
-            UIApplicationShortcutItem(type: "Call", localizedTitle: "Call", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .audio)),
-            UIApplicationShortcutItem(type: "Message", localizedTitle: "Message", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .message)),
-            UIApplicationShortcutItem(type: "Saved", localizedTitle: "Saved", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .love)),
+            UIApplicationShortcutItem(type: "Tweet", localizedTitle: "Tweet", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .compose), userInfo: tweetuserInfo),
+            UIApplicationShortcutItem(type: "Call", localizedTitle: "Call", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .audio), userInfo: calluserInfo),
+            UIApplicationShortcutItem(type: "Message", localizedTitle: "Message", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .message), userInfo: messageuserInfo),
+            UIApplicationShortcutItem(type: "Saved", localizedTitle: "Saved", localizedSubtitle: "", icon: UIApplicationShortcutIcon(type: .love), userInfo: saveduserInfo),
         ]
     }
     
